@@ -53,8 +53,7 @@ class _CustomListTitle extends StatelessWidget {
       trailing: const Icon(Icons.arrow_forward_ios),
       title: Text(menuItem.title),
       subtitle: Text(menuItem.subTitle),
-      onTap: ()=>  context.push(menuItem.links)
-      
+      onTap: ()=>  context.push(menuItem.links)      
     );
   }
 }
