@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
+ const games = <Map<String, dynamic>>[
+    {"selected": false, "label": "Super Mario"},
+    {"selected": false, "label": "Zelda"},
+    {"selected": false, "label": "Mario Kart"},
+    {"selected": false, "label": "Pokemon"},
+  ];
+  
 class UiControlsScreen extends StatelessWidget {
- 
   static const name = "UiControlsScreen";
- 
+
   const UiControlsScreen({super.key});
 
   @override
@@ -18,7 +24,6 @@ class UiControlsScreen extends StatelessWidget {
 }
 
 class _UiControlsView extends StatefulWidget {
-
   const _UiControlsView();
 
   @override
@@ -26,56 +31,80 @@ class _UiControlsView extends StatefulWidget {
 }
 
 class _UiControlsViewState extends State<_UiControlsView> {
-
   bool isDevp = true;
-  List<String> games = ["Super Mario", "Zelda", "Mario Kart", "Pokemon"];
+  bool wantsBreakfast = false;
+  bool wantsLunch = false;
+  bool wantsDinner = false;
+
   @override
   Widget build(BuildContext context) {
     return ListView(
       physics: const ClampingScrollPhysics(),
-      children:  [
+      children: [
         SwitchListTile(
           title: const Text("Switch"),
           subtitle: const Text("Subtitle"),
           value: isDevp,
-          onChanged: (value)=>            
-            setState(() {
-              isDevp = !isDevp;
-            })
-          ,
+          onChanged: (value) => setState(() {
+            isDevp = !isDevp;
+          }),
+        ),
+        ExpansionTile(
+          title: const Text("Expansion Tile"),
+          subtitle:  const Text("Game selected"),
+          children: [
+            
+            ...games.map((e) => _ListsRadio(nameRadio: e["label"], isSelected: e["selected"],)),
+          ],
         ),
 
-        Column(
+        ExpansionTile(
+          title: const Text("Expansion Tile"),
+          subtitle:  const Text("Game selected"),
           children: [
-          ...games.map(
-            (e)=> _ListsRadio(nameRadio: e)
+            CheckboxListTile(title: const Text("Desayuno"),value: wantsBreakfast, onChanged: (value){ setState(() {
+              wantsBreakfast = !wantsBreakfast;
+            });}),
 
-          ),
-        
+            CheckboxListTile(title: const Text("Almuerzo"),value: wantsLunch, onChanged: (value){setState(() {
+              wantsLunch = !wantsLunch;
+            });}),
 
+            CheckboxListTile(title: const Text("Cena"),value: wantsDinner, onChanged: (value){setState(() {
+              wantsDinner = !wantsDinner;
+            });}),
+
+            
+            
           ],
-        )
-        
-        
+        ),
       ],
     );
   }
 }
 
-class _ListsRadio extends StatelessWidget {
+class _ListsRadio extends StatefulWidget {
 
-  final String nameRadio;
+  String nameRadio;
+  bool isSelected;
 
-  const _ListsRadio({super.key,required this.nameRadio});
+  _ListsRadio({super.key, required this.nameRadio,required this.isSelected});
 
+  @override
+  State<_ListsRadio> createState() => _ListsRadioState();
+}
+
+class _ListsRadioState extends State<_ListsRadio> {
   @override
   Widget build(BuildContext context) {
     return RadioListTile(
-      title: Text("$nameRadio"),
-      subtitle: Text("$nameRadio"),
-      value: true,
+      title: Text("${widget.nameRadio}"),
+      subtitle: Text("${widget.nameRadio}"),
+      value: widget.isSelected,
       groupValue: true,
-      onChanged: (value)=>{},
+      onChanged: (value) => setState(() {
+          widget.isSelected = !widget.isSelected;
+        })      ,
     );
   }
 }
