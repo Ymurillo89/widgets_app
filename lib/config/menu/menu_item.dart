@@ -17,6 +17,6 @@ const appMenuItems= <MenuItem>[
   MenuItem(title: 'ProgressIndicator', subTitle: 'Generales y controlados', links: '/progress', icon: Icons.refresh),  
   MenuItem(title: 'Snackbars', subTitle: 'Generales y controlados', links: '/snackbars', icon: Icons.line_style_sharp),
   MenuItem(title: 'Animated Container', subTitle: 'Stateful widget animado', links: '/animated', icon: Icons.check_box_rounded),  
-  /*MenuItem(title: 'Contact Us', subTitle: 'Get in touch with us', links: 'https://www.example.com/contact', icon: Icons.contact_mail),
-  MenuItem(title: 'Privacy Policy', subTitle: 'Learn about our privacy policy', links: 'https://www.example.com/privacy', icon: Icons.info_outline), */
+  MenuItem(title: 'IU Controls +Tiles', subTitle: 'Una serie de controles en flutter', links: '/ui-Controls', icon: Icons.car_rental_outlined),  
+  
 ];
